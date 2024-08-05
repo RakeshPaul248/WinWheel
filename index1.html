@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Winwheel from Textarea Data</title>
+    <style>
+      body {
+        font-family: arial;
+      }
+
+      /* Sets the background image for the wheel */
+      td.the_wheel {
+        background-image: url(http://dougtesting.net//elements/images/examples/wheel_back.png);
+        background-position: center;
+        background-repeat: none;
+      }
+
+      /* Do some css reset on selected elements */
+      h1,
+      p {
+        margin: 0;
+      }
+
+      div.power_controls {
+        margin-right: 70px;
+      }
+
+      div.html5_logo {
+        margin-left: 70px;
+      }
+
+      /* Styles for the power selection controls */
+      table.power {
+        background-color: #cccccc;
+        cursor: pointer;
+        border: 1px solid #333333;
+      }
+
+      table.power th {
+        background-color: white;
+        cursor: default;
+      }
+
+      td.pw1 {
+        background-color: #6fe8f0;
+      }
+
+      td.pw2 {
+        background-color: #86ef6f;
+      }
+
+      td.pw3 {
+        background-color: #ef6f6f;
+      }
+
+      /* Style applied to the spin button once a power has been selected */
+      .clickable {
+        cursor: pointer;
+      }
+
+      /* Other misc styles */
+      .margin_bottom {
+        margin-bottom: 5px;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .names-list {
+        margin-bottom: 20px;
+      }
+
+      textarea {
+        width: 95%;
+        height: 100px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 20px;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #output {
+        margin: 20px;
+        text-align: center;
+        font-size: 24px;
+        min-height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #6d3a8787;
+        font-size: 16px;
+      }
+      ::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      button {
+        margin: 10px 0;
+      }
+      /* #dataTable > *:first-child {
+        display: none !important;
+      } */
+      /* #dataTable {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 356px;
+    } */
+      #dataTable {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0 10px;
+      }
+      @media only screen and (max-width: 745px) {
+        #dataTable {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media only screen and (max-width: 453px) {
+        #dataTable {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .indexspan {
+        font-weight: bold;
+        padding-right: 5px;
+      }
+      .chartholder > text {
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+      }
+      .completemodal {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #bdbdbd94;
+      }
+      .contentModal {
+        width: 900px;
+        padding: 20px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        box-shadow: 0px 0px 3px 4px #b5b4b4;
+        font-size: 32px;
+        color: #30606e;
+      }
+      .UnselectText {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; gap: 20px">
+      <div style="width: 800px" id="chart"></div>
+      <div style="display: flex; width: 100%; flex-direction: column">
+        <img
+          style="align-self: end; padding: 20px; position: absolute"
+          src="https://easycrm.in/gstdost/images/logo.jpg"
+          alt=""
+          width="150"
+        />
+        <textarea
+          style="
+            width: 76.5%;
+            height: 200px;
+            font-size: 18px;
+            padding: 10px 200px 10px 10px;
+            border-radius: 10px;
+            border: 1px solid #227583;
+          "
+          id="dataTextarea"
+        >
+DOST Abhay Agarwal
+DOST Adyansh Rai
+DOST Anand Awasthi
+DOST Chirag Taparia
+DOST Jay Mondal
+DOST Komal Singh
+DOST Krishna Kant Jha
+DOST Kritika Joshi
+DOST Lakshmi Harsh
+DOST Manish Jain
+DOST Minerva Kumari
+DOST Muskan Sah
+DOST Pankaj Khaitan
+DOST Pankaj Kr. Kamat
+DOST Pankaj Agarwal
+DOST Pratik Agarwal 
+DOST Raghav Almal
+DOST Ravi Shankar Pandey
+DOST Ravi Sugla
+DOST Ravina Gupta
+DOST Ritika Singh
+DOST Shiwangi Singh
+DOST Shruti Bhartia
+DOST Shruti Taparia
+DOST Shruti Sharma
+DOST Sonali Singh
+DOST Sonu Singh
+DOST Soumen Kr. Shee
+DOST Sumit Kumar Ray
+DOST Sumit Jaiswal
+DOST Sumit Singh
+DOST Surojit Saha
+DOST Vikash Das</textarea
+        >
+        <div
+          style="
+            text-align: center;
+            padding: 20px 0;
+            min-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            margin: 10px 0 0 0;
+            font-size: 66px;
+            line-height: 80px;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: url(https://as1.ftcdn.net/v2/jpg/05/68/49/90/1000_F_568499083_q9QfafI1PkGJA8QQMIpiTT557xUUJ4Qq.jpg)
+              0 0 / cover repeat;
+            color: #de466c;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-position: bottom;
+          "
+          id="outputDiv"
+        ></div>
+        <div
+          id="stopWatch"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0;
+          "
+        >
+          <button
+            style="font-size: 20px; width: auto; background-color: #686868"
+            id="resetButton"
+            onclick="resetStopwatch()"
+          >
+            Reset
+          </button>
+          <div style="font-size: 30px" id="stopwatch" class="stopwatch">
+            00:00:00
+          </div>
+          <button
+            style="width: auto; background-color: #408d37; font-size: 20px"
+            id="toggleButton"
+            onclick="toggleStopwatch()"
+          >
+            Start
+          </button>
+        </div>
+        <div id="dataTable"></div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="winwheel.js"></script>
+    <script src="stopwatch.js"></script>
+  </body>
+</html>

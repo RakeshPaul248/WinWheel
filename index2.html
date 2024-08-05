@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrap {
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+      }
+      .wrap button {
+        padding: 10px;
+        font-size: 1.2rem;
+        margin: 1rem 0 1rem 0;
+      }
+      .wrap .arrow {
+        position: absolute;
+        right: -25px;
+        top: 230px;
+        font-size: 2rem;
+      }
+      .result {
+        font-size: 2rem;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="segmentsTextArea" rows="10" cols="50">
+      Segment 1
+      Segment 2
+      Segment 3</textarea
+    >
+    <div class="wrap">
+      <canvas id="canvas" width="500" height="500"></canvas>
+      <div class="arrow">👈</div>
+      <button type="button">SPIN</button>
+      <div class="result"></div>
+    </div>
+    <script src="winwheel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+      const segments = [
+        { text: "1" },
+        { text: "2" },
+        { text: "3" },
+        { text: "4" },
+        { text: "5" },
+        { text: "6" },
+        { text: "7" },
+        { text: "8" },
+        { text: "9" },
+        { text: "10" },
+        { text: "11" },
+        { text: "12" },
+        { text: "13" },
+        { text: "14" },
+        { text: "15" },
+        { text: "16" },
+        { text: "17" },
+        { text: "18" },
+        { text: "19" },
+        { text: "20" },
+        { text: "21" },
+        { text: "22" },
+        { text: "23" },
+        { text: "24" },
+        { text: "25" },
+        { text: "26" },
+        { text: "27" },
+        { text: "28" },
+        { text: "29" },
+        { text: "30" },
+        { text: "31" },
+        { text: "32" },
+        { text: "33" },
+        { text: "34" },
+        { text: "35" },
+        { text: "36" },
+        { text: "37" },
+        { text: "38" },
+        { text: "39" },
+        { text: "40" },
+      ];
+
+      const wheel = new Winwheel({
+        canvasId: "canvas",
+        fillStyle: "#eeeeee",
+        lineWidth: 1,
+        textAlignment: "outer",
+        textFontSize: 14,
+        innerRadius: 70,
+        segments,
+        numSegments: segments.length,
+        pointerAngle: 90,
+
+        animation: {
+          type: "spinToStop",
+          callbackFinished: "end()",
+          duration: 5,
+          spins: 8,
+        },
+      });
+
+      function end() {
+        const winningSegment = wheel.getIndicatedSegment();
+
+        // console.log(winningSegment.text)
+        $result.innerHTML = `${winningSegment.text}`;
+      }
+
+      const $btn = document.querySelector("button");
+      const $result = document.querySelector(".result");
+
+      $btn.addEventListener("click", () => {
+        // reset
+        $result.innerHTML = "";
+        wheel.stopAnimation(false);
+        wheel.rotationAngle = 0;
+        wheel.draw();
+
+        // start
+        wheel.startAnimation();
+      });
+    </script>
+  </body>
+</html>
